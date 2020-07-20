@@ -90,6 +90,10 @@ composer_install:
 	if ! patch --reverse --silent --force --dry-run $(DESTDIR)$(MODDIR)/vendor/easyrdf/easyrdf/lib/EasyRdf/Parser/RdfXml.php $(TOP)/RdfXml.php.patch; then \
 		patch --silent --force $(DESTDIR)$(MODDIR)/vendor/easyrdf/easyrdf/lib/EasyRdf/Parser/RdfXml.php $(TOP)/RdfXml.php.patch; \
 	fi
+	rm -rf $(DESTDIR)$(MODDIR)/www/ui/css/bootstrap
+	rm -rf $(DESTDIR)$(MODDIR)/www/ui/scripts/bootstrap
+	$(INSTALL_DATA) $(DESTDIR)$(MODDIR)/vendor/twbs/bootstrap/dist/css/* -t $(DESTDIR)$(MODDIR)/www/ui/css/bootstrap
+	$(INSTALL_DATA) $(DESTDIR)$(MODDIR)/vendor/twbs/bootstrap/dist/js/* -t $(DESTDIR)$(MODDIR)/www/ui/scripts/bootstrap
 
 .PHONY: subdirs $(BUILDDIRS)
 .PHONY: subdirs $(DIRS)
